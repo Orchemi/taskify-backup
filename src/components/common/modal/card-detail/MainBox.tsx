@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import Comment from '@/components/common/modal/card-detail/Comment';
-import ContentAndImageBox from '@/components/common/modal/card-detail/ContentAndImageBox';
-import TagBox from '@/components/common/modal/card-detail/TagBox';
+import Comment from '@/components/common/Modal/card-detail/Comment';
+import ContentAndImageBox from '@/components/common/Modal/card-detail/ContentAndImageBox';
+import TagBox from '@/components/common/Modal/card-detail/TagBox';
 import MEDIA_QUERIES from '@/constants/MEDIAQUERIES';
 import { CardInfoProps } from '@/types/CardDetail';
 
