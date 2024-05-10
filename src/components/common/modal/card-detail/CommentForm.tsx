@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import styled from 'styled-components';
 import Button from '@/components/common/button/Button';
-import { ThemeContext } from '@/components/provider/ThemeProvider';
+import useSafeThemeContext from '@/components/provider/ThemeProvider';
 import useCreateCommentsMutation from '@/hooks/query/comments/useCreateCommentsMutation';
 import MEDIA_QUERIES from '@/constants/MEDIAQUERIES';
 
@@ -76,7 +76,7 @@ const S = {
 };
 
 function CommentForm() {
-  const { cardDetailData } = useContext(ThemeContext);
+  const { cardDetailData } = useSafeThemeContext();
 
   const [inputValue, setInputValue] = useState('');
 

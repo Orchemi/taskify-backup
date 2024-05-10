@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useContext } from 'react';
 import styled from 'styled-components';
-import { ThemeContext } from '@/components/provider/ThemeProvider';
+import useSafeThemeContext from '@/components/provider/ThemeProvider';
 import MEDIA_QUERIES from '@/constants/MEDIAQUERIES';
 import { CardInfoProps } from '@/types/CardDetail';
 import defaultImage from '@/public/image/landing.png';
@@ -59,7 +59,7 @@ const S = {
 };
 
 function ContentAndImageBox() {
-  const { cardDetailData } = useContext(ThemeContext);
+  const { cardDetailData } = useSafeThemeContext();
   const description = cardDetailData?.description;
   const imageUrl = cardDetailData?.imageUrl;
 

@@ -1,18 +1,12 @@
-import { createContext, useMemo } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import MainBox from '@/components/common/Modal/card-detail/MainBox';
 import ModalHeader from '@/components/common/Modal/card-detail/ModalHeader';
 import SideBox from '@/components/common/Modal/card-detail/SideBox';
 import BackDropModal from '@/components/common/modal/BackDropModal';
-import ThemeContextProvider from '@/components/provider/ThemeProvider';
+import useSafeThemeContext from '@/components/provider/ThemeProvider';
 import useDetailCardQuery from '@/hooks/query/cards/useDetailCardQuery';
 import MEDIA_QUERIES from '@/constants/MEDIAQUERIES';
-import { CardInfoProps } from '@/types/CardDetail';
-
-// export interface ContextProps {
-//   cardDetailData: CardInfoProps;
-//   title: string;
-// }
 
 const S = {
   ModalLayout: styled.div`
@@ -50,37 +44,28 @@ const S = {
 };
 
 interface ModalOpenAndCloseProps {
-  isOpen: boolean;
-  onClose: () => void;
   cardId: number;
-  title: string;
-  openToDoEditModal: () => void;
 }
-function CardConfirmModal({
-  isOpen,
-  onClose,
-  cardId,
-  title,
-  openToDoEditModal,
-}: ModalOpenAndCloseProps) {
-  // const { data: cardDetailData } = useDetailCardQuery({
-  //   cardId,
-  // });
+function CardConfirmModal({ cardId }: ModalOpenAndCloseProps) {
+  const { showConfirmModal, closeConfirmModal, setCardDetailData } =
+    useSafeThemeContext();
 
-  // const ThemeProviderInitialValue = useMemo(() => {
-  //   return { cardDetailData, title, openToDoEditModal, onClose };
-  // }, [cardDetailData, title, openToDoEditModal, onClose]);
+  const { data: cardDetailData } = useDetailCardQuery({
+    cardId,
+  });
+
+  useEffect(() => {
+    setCardDetailData(cardDetailData);
+  }, [setCardDetailData, cardDetailData]);
 
   return (
-    <BackDropModal isOpen={isOpen} onClose={onClose}>
+    <BackDropModal isOpen={showConfirmModal} onClose={closeConfirmModal}>
       <S.ModalLayout>
-        <ThemeContextProvider>
-          <ModalHeader />
-          <S.ModalBody>
-            <MainBox />
-            <SideBox />
-          </S.ModalBody>
-        </ThemeContextProvider>
+        <ModalHeader />
+        <S.ModalBody>
+          <MainBox />
+          <SideBox />
+        </S.ModalBody>
       </S.ModalLayout>
     </BackDropModal>
   );

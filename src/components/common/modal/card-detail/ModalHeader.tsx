@@ -1,7 +1,7 @@
-import { useContext, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import styled from 'styled-components';
 import ConfirmDeleteModal from '@/components/common/Modal/ConfirmDeleteModal';
-import { ThemeContext } from '@/components/provider/ThemeProvider';
+import useSafeThemeContext from '@/components/provider/ThemeProvider';
 import useDeleteCardMutation from '@/hooks/query/cards/useDeleteCardMutation';
 import useOutSideClick from '@/hooks/useClickOutside';
 import MEDIA_QUERIES from '@/constants/MEDIAQUERIES';
@@ -103,8 +103,8 @@ const S = {
 function ModalHeader() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  const { cardDetailData, openToDoEditModal, onClose } =
-    useContext(ThemeContext);
+  const { cardDetailData, openEditModal, closeConfirmModal } =
+    useSafeThemeContext();
   const optionAreaRef = useRef<HTMLUListElement>(null);
 
   const title = cardDetailData?.title;
@@ -116,8 +116,8 @@ function ModalHeader() {
   });
 
   const handleClickEdit = () => {
-    openToDoEditModal();
-    onClose();
+    openEditModal();
+    closeConfirmModal();
   };
   const handleClickKebab = () => {
     setIsOpen(!isOpen);
@@ -148,11 +148,11 @@ function ModalHeader() {
             onClose={() => setIsDeleteOpen(false)}
             message="정말 삭제하시겠습니까?🥹"
             onClick={() =>
-              responseInvitationMutate({ cardId: cardDetailData?.id })
+              responseInvitationMutate({ cardId: cardDetailData.id })
             }
           />
         </S.DropdownContainer>
-        <S.CloseIcon onClick={onClose} />
+        <S.CloseIcon onClick={closeConfirmModal} />
       </S.HeaderButton>
     </S.ModalHeader>
   );

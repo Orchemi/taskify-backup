@@ -1,10 +1,11 @@
 import Image from 'next/image';
-import { useState } from 'react';
-import styled from 'styled-components';
+import { useContext, useState } from 'react';
+import styled, { useTheme } from 'styled-components';
 import AvatarImage from '@/components/common/AvatarImage';
 import ToDoEditModal from '@/components/common/Modal/ToDoEditModal';
 import CardConfirmModal from '@/components/common/Modal/card-detail/CardConfirmModal';
 import HashTag from '@/components/common/tag/HashTag';
+import useSafeThemeContext from '@/components/provider/ThemeProvider';
 import useWindowSize, { Size } from '@/hooks/useWindowSize';
 import MEDIA_QUERIES from '@/constants/MEDIAQUERIES';
 import { CardInfoProps } from '@/types/CardDetail';
@@ -150,17 +151,12 @@ function Card({
   const isTablet: boolean = width !== undefined && width <= 1200;
   const isMobile: boolean = width !== undefined && width < 768;
 
-  const [isModalOpen, setModalOpen] = useState(false);
-  const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false);
-
-  const [isToDoEditModalOpen, setToDoEditModalOpen] = useState(false);
-  const openToDoEditModal = () => setToDoEditModalOpen(true);
-  const closeToDoEditModal = () => setToDoEditModalOpen(false);
+  const { openConfirmModal, showEditModal, closeEditModal } =
+    useSafeThemeContext();
 
   return (
     <>
-      <S.CardContainer onClick={openModal}>
+      <S.CardContainer onClick={openConfirmModal}>
         {cardInfoData?.imageUrl && (
           <S.ImageWrapper>
             <S.Image
@@ -197,17 +193,11 @@ function Card({
         </S.CardContentWrapper>
       </S.CardContainer>
 
-      <CardConfirmModal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        cardId={cardInfoData.id}
-        title={columnTitle}
-        openToDoEditModal={openToDoEditModal}
-      />
+      <CardConfirmModal cardId={cardInfoData.id} />
 
       <ToDoEditModal
-        isOpen={isToDoEditModalOpen}
-        onClose={closeToDoEditModal}
+        isOpen={showEditModal}
+        onClose={closeEditModal}
         cardId={cardInfoData?.id}
         dashboardId={cardInfoData?.dashboardId}
       />

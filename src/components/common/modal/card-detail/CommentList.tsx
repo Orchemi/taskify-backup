@@ -2,7 +2,7 @@ import { useContext, useRef } from 'react';
 import styled from 'styled-components';
 import CommentItem from '@/components/common/Modal/card-detail/CommentItem';
 import CommentListLoader from '@/components/common/Modal/card-detail/CommentListLoader';
-import { ThemeContext } from '@/components/provider/ThemeProvider';
+import useSafeThemeContext from '@/components/provider/ThemeProvider';
 import useCommentsListQuery from '@/hooks/query/comments/useCommentsListQuery';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import MEDIA_QUERIES from '@/constants/MEDIAQUERIES';
@@ -44,7 +44,7 @@ interface Page {
 }
 
 function CommentList() {
-  const { cardDetailData } = useContext(ThemeContext);
+  const { cardDetailData } = useSafeThemeContext();
   const loaderRef = useRef<HTMLElement | null>(null);
 
   const { data, fetchNextPage }: any = useCommentsListQuery({

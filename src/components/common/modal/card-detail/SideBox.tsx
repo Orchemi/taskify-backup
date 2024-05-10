@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
 import AvatarImage from '@/components/common/AvatarImage';
-import { ThemeContext } from '@/components/provider/ThemeProvider';
+import useSafeThemeContext from '@/components/provider/ThemeProvider';
 import useDetailCardQuery from '@/hooks/query/cards/useDetailCardQuery';
 import useWindowSize, { Size } from '@/hooks/useWindowSize';
 import MEDIA_QUERIES from '@/constants/MEDIAQUERIES';
@@ -83,7 +83,7 @@ const S = {
 };
 
 function SideBox() {
-  const { cardDetailData } = useContext(ThemeContext);
+  const { cardDetailData } = useSafeThemeContext();
   const { width }: Size = useWindowSize();
   const isMobile: boolean = width !== undefined && width < 768;
   const { data } = useDetailCardQuery({

@@ -5,6 +5,7 @@ import AddIconButton from '@/components/common/button/AddIconButton';
 import ColumnsManageModal from '@/components/common/modal/ColumnsManageModal';
 import ToDoCreateModal from '@/components/common/modal/ToDoCreateModal';
 import CardLoader from '@/components/dashboard/column/CardLoader';
+import { ThemeContextProvider } from '@/components/provider/ThemeProvider';
 import useCardListQuery from '@/hooks/query/cards/useCardListQuery';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import MEDIA_QUERIES from '@/constants/MEDIAQUERIES';
@@ -213,11 +214,13 @@ const Column = React.forwardRef(({ title, id, dashboardId }, ref) => {
 
       <S.ColumnContentContainer>
         <S.AddButtonContent onClick={openModal1} />
-        {cards?.pages.map((page) =>
-          page.cards.map((card) => (
-            <Card key={card.id} data={card} columnTitle={title} />
-          )),
-        )}
+        <ThemeContextProvider>
+          {cards?.pages.map((page) =>
+            page.cards.map((card) => (
+              <Card key={card.id} data={card} columnTitle={title} />
+            )),
+          )}
+        </ThemeContextProvider>
         <CardLoader
           loaderRef={loaderRef}
           style={

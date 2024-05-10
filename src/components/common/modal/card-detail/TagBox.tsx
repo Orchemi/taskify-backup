@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import styled from 'styled-components';
 import HashTag from '@/components/common/tag/HashTag';
 import StateTag from '@/components/common/tag/StateTag';
-import { ThemeContext } from '@/components/provider/ThemeProvider';
+import useSafeThemeContext from '@/components/provider/ThemeProvider';
 import useWindowSize, { Size } from '@/hooks/useWindowSize';
 import MEDIA_QUERIES from '@/constants/MEDIAQUERIES';
 import { CardInfoProps } from '@/types/CardDetail';
@@ -26,7 +26,7 @@ const S = {
 };
 
 function TagBox() {
-  const { cardDetailData, title: stateTag } = useContext(ThemeContext);
+  const { cardDetailData, title: stateTag } = useSafeThemeContext();
   const tags = cardDetailData && cardDetailData.tags;
   const { width }: Size = useWindowSize();
   const isMobile: boolean = width !== undefined && width <= 768;
