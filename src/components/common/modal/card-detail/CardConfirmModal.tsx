@@ -1,9 +1,10 @@
-import { createContext } from 'react';
+import { createContext, useMemo } from 'react';
 import styled from 'styled-components';
+import MainBox from '@/components/common/Modal/card-detail/MainBox';
+import ModalHeader from '@/components/common/Modal/card-detail/ModalHeader';
+import SideBox from '@/components/common/Modal/card-detail/SideBox';
 import BackDropModal from '@/components/common/modal/BackDropModal';
-import MainBox from '@/components/common/modal/card-detail/MainBox';
-import ModalHeader from '@/components/common/modal/card-detail/ModalHeader';
-import SideBox from '@/components/common/modal/card-detail/SideBox';
+import ThemeContextProvider from '@/components/provider/ThemeProvider';
 import useDetailCardQuery from '@/hooks/query/cards/useDetailCardQuery';
 import MEDIA_QUERIES from '@/constants/MEDIAQUERIES';
 import { CardInfoProps } from '@/types/CardDetail';
@@ -12,8 +13,6 @@ import { CardInfoProps } from '@/types/CardDetail';
 //   cardDetailData: CardInfoProps;
 //   title: string;
 // }
-
-export const ThemeContext = createContext<any>(null);
 
 const S = {
   ModalLayout: styled.div`
@@ -64,22 +63,24 @@ function CardConfirmModal({
   title,
   openToDoEditModal,
 }: ModalOpenAndCloseProps) {
-  const { data: cardDetailData } = useDetailCardQuery({
-    cardId,
-  });
+  // const { data: cardDetailData } = useDetailCardQuery({
+  //   cardId,
+  // });
+
+  // const ThemeProviderInitialValue = useMemo(() => {
+  //   return { cardDetailData, title, openToDoEditModal, onClose };
+  // }, [cardDetailData, title, openToDoEditModal, onClose]);
 
   return (
     <BackDropModal isOpen={isOpen} onClose={onClose}>
       <S.ModalLayout>
-        <ThemeContext.Provider
-          value={{ cardDetailData, title, openToDoEditModal, onClose }}
-        >
+        <ThemeContextProvider>
           <ModalHeader />
           <S.ModalBody>
             <MainBox />
             <SideBox />
           </S.ModalBody>
-        </ThemeContext.Provider>
+        </ThemeContextProvider>
       </S.ModalLayout>
     </BackDropModal>
   );

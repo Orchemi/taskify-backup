@@ -1,8 +1,7 @@
 import { useContext, useRef, useState } from 'react';
-import { ThemeContext } from './CardConfirmModal';
 import styled from 'styled-components';
-import ConfirmDeleteModal from '@/components/common/modal/ConfirmDeleteModal';
-import WarningModal from '@/components/common/modal/WarningModal';
+import ConfirmDeleteModal from '@/components/common/Modal/ConfirmDeleteModal';
+import { ThemeContext } from '@/components/provider/ThemeProvider';
 import useDeleteCardMutation from '@/hooks/query/cards/useDeleteCardMutation';
 import useOutSideClick from '@/hooks/useClickOutside';
 import MEDIA_QUERIES from '@/constants/MEDIAQUERIES';

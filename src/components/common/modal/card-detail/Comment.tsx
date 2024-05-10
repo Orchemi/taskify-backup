@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import CommentForm from '@/components/common/modal/card-detail/CommentForm';
-import CommentList from '@/components/common/modal/card-detail/CommentList';
+import CommentForm from '@/components/common/Modal/card-detail/CommentForm';
+import CommentList from '@/components/common/Modal/card-detail/CommentList';
 import { CardInfoProps } from '@/types/CardDetail';
 
 const S = {

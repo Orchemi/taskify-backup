@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useContext } from 'react';
-import { ThemeContext } from './CardConfirmModal';
 import styled from 'styled-components';
+import { ThemeContext } from '@/components/provider/ThemeProvider';
 import MEDIA_QUERIES from '@/constants/MEDIAQUERIES';
 import { CardInfoProps } from '@/types/CardDetail';
 import defaultImage from '@/public/image/landing.png';

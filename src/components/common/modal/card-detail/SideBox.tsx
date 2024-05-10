@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import { ThemeContext } from './CardConfirmModal';
 import styled from 'styled-components';
 import AvatarImage from '@/components/common/AvatarImage';
+import { ThemeContext } from '@/components/provider/ThemeProvider';
 import useDetailCardQuery from '@/hooks/query/cards/useDetailCardQuery';
 import useWindowSize, { Size } from '@/hooks/useWindowSize';
 import MEDIA_QUERIES from '@/constants/MEDIAQUERIES';

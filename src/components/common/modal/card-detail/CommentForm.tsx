@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
-import { ThemeContext } from './CardConfirmModal';
 import styled from 'styled-components';
 import Button from '@/components/common/button/Button';
+import { ThemeContext } from '@/components/provider/ThemeProvider';
 import useCreateCommentsMutation from '@/hooks/query/comments/useCreateCommentsMutation';
 import MEDIA_QUERIES from '@/constants/MEDIAQUERIES';
 
